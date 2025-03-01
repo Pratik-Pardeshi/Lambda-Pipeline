@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo "Installing dependencies..."
+  build:
+    commands:
+      - echo "Zipping function..."
+      - zip function.zip lambda_function.py
+  post_build:
+    commands:
+      - echo "Uploading to S3..."
+      - aws s3 cp function.zip s3://aws3mbrei/
+      - echo "Done"
+artifacts:
+  files:
+    - function.zip
